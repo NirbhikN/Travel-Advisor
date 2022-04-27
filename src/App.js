@@ -15,7 +15,7 @@ const App = () => {
   const [places, setPlaces] = useState([])
 
   const [coordinates, setCoordinates] = useState()
-  const [bounds, setBounds] = useState(null)
+  const [bounds, setBounds] = useState({})
 
   // Current location of user - only at the start of site
   useEffect(() => {
@@ -30,11 +30,13 @@ const App = () => {
 
 
   // Location of edges when map is zoomed or moved
+
   useEffect(() => {
     
-    // console.log(coordinates,bounds)
+  //   // console.log(coordinates,bounds)
 
-    getPlacesData(bounds.sw ,bounds.ne)
+    getPlacesData(bounds.sw,bounds.ne)
+    // getPlacesData()
       .then((data) => {
         console.log(data)
         setPlaces(data)
@@ -59,8 +61,6 @@ const App = () => {
           />
       </Grid>
     </Grid>
-
-    <h1>Hello</h1>
     </>
   )
 }

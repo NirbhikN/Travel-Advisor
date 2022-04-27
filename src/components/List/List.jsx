@@ -42,8 +42,6 @@ const List = ({places}) => {
           {places?.map((place,i)=>(
             <Grid item key={i} xs={12}>
                 <PlaceDetails place={place}/>
-            
-
             </Grid>
           ))}
       </Grid>
