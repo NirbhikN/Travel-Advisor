@@ -25,9 +25,16 @@ const PlaceDetails = ({place}) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5">
-          {" "}
-          {place.name}{" "}
+          {place.name}
         </Typography>
+
+        {/* For Rating */}
+        <Box display="flex" justifyContent="space-between">
+        <Rating  value={Number(place.rating)} readOnly />
+          <Typography variant="subtitle1" gutterBottom>
+            out of {place.num_reviews} reviews
+          </Typography>
+        </Box>
 
         {/* For price */}
         <Box display="flex" justifyContent="space-between">
@@ -69,31 +76,47 @@ const PlaceDetails = ({place}) => {
 
         {/* Address  & Phone Number*/}
         {place?.address && (
-          <Typography variant="subtitle2" gutterBottom color='textSecondary' className={classes.subtitle}>
-            <LocationOn/> {place.address}
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            color="textSecondary"
+            className={classes.subtitle}
+          >
+            <LocationOn /> {place.address}
           </Typography>
         )}
 
         {place?.phone && (
-          <Typography variant="subtitle2" gutterBottom color='textSecondary' className={classes.spacing}>
-            <Phone/> {place.phone}
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            color="textSecondary"
+            className={classes.spacing}
+          >
+            <Phone /> {place.phone}
           </Typography>
         )}
 
-
         {/* TripAdvisor page and website */}
         <CardActions>
-          <Button size='small' color='primary' onClick={()=>window.open(place.web_url,'_blank')}> Trip Advisor</Button>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => window.open(place.web_url, "_blank")}
+          >
+            {" "}
+            Trip Advisor
+          </Button>
 
-          <Button size='small' color='primary' onClick={()=>window.open(place.website,'_blank')}> Website</Button>
-
-
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => window.open(place.website, "_blank")}
+          >
+            {" "}
+            Website
+          </Button>
         </CardActions>
-
-
-
-
-
       </CardContent>
     </Card>
   );

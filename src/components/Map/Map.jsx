@@ -5,9 +5,9 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
 import useStyles from "./styles";
 
-const Map = ({ setCoordinates, setBounds, coordinates }) => {
+const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
   const classes = useStyles();
-  const isMobile = useMediaQuery("(min-width:600px)");
+  const isDesktop = useMediaQuery("(min-width:600px)");
 
   return (
     <div className={classes.mapContainer}>
@@ -24,7 +24,44 @@ const Map = ({ setCoordinates, setBounds, coordinates }) => {
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
         onChildClick={""}
-      ></GoogleMapReact>
+      >
+
+        {/* Pin over map */}
+        {places?.map((place,i)=>(
+          <div 
+            className={classes.markerContainer}
+            lat={Number(place.latitude)}
+            lng={Number(place.longitude)}
+            key={i}
+            >
+
+            {
+              !isDesktop?(
+                <LocationOnOutlinedIcon color='primary' fontSize='large' />
+              ):(
+                <Paper elevation={3} className={classes.paper}>
+                  <Typography variant="subtitle2" gutterBottom className={classes.typography} >
+                    {place.name}
+                    <img 
+                      src={place.photo? place.photo.images.large.url : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"}
+                      alt={place.name}
+                      style={{width:'110px', height:'90px'}}
+                    />
+
+                    <Rating size='small' value={Number(place.rating)}  readOnly/>
+                  </Typography>
+
+                </Paper>
+              )
+            }
+
+            </div>
+
+        ))}
+
+
+
+      </GoogleMapReact>
     </div>
   );
 };
