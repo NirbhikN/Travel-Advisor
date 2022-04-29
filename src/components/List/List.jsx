@@ -7,21 +7,27 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
 import useStyles from './styles'
 
-const List = ({places, childClicked, isLoading}) => {
-  const classes=useStyles();
-  const [type, setType] = useState('restaurants')
-  const [rating, setRating] = useState('')
+const List = ({
+  places,
+  childClicked,
+  isLoading,
+  type,
+  setType,
+  rating,
+  setRating,
+}) => {
+  const classes = useStyles();
 
-  const [elRefs, setElRefs] = useState([])
+  const [elRefs, setElRefs] = useState([]);
 
-// Used createRef to render the list when anything in the map is clicked
-useEffect(() => {
-  const refs=Array(places?.length).fill().map((_,i)=>elRefs[i] || createRef())  
+  // Used createRef to render the list when anything in the map is clicked
+  useEffect(() => {
+    const refs = Array(places?.length)
+      .fill()
+      .map((_, i) => elRefs[i] || createRef());
 
-  setElRefs(refs)
-}, [places])
-
-  
+    setElRefs(refs);
+  }, [places]);
 
   return (
     <div className={classes.container} sx={{ p: 5 }}>
@@ -84,6 +90,6 @@ useEffect(() => {
       )}
     </div>
   );
-}
+};
 
 export default List
