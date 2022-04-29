@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip , Rating} from '@mui/material'
