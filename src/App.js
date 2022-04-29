@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 
 import { CssBaseline, Grid } from '@mui/material'
 
-import  getPlacesData  from './api';
+import  {getPlacesData, getWeatherData}  from './api';
 
 
 
@@ -13,6 +13,7 @@ import Map from './components/Map/Map'
 const App = () => {
 
   const [places, setPlaces] = useState([])
+  const [weatherData, setWeatherData] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
 
 
@@ -36,6 +37,9 @@ const App = () => {
   // Location of edges when map is zoomed or moved || When map is loading
   useEffect(() => {
     if(bounds.sw && bounds.ne){
+      // For Weather
+      getWeatherData(coordinates.lat,coordinates.lng)
+        .then((data)=> setWeatherData(data))
 
       setIsLoading(true)
 
@@ -84,6 +88,7 @@ const App = () => {
             coordinates={coordinates}
             places={filteredPlaces.length? filteredPlaces : places}
             setChildClicked={setChildClicked}
+            weatherData={weatherData}
           />
       </Grid>
     </Grid>
