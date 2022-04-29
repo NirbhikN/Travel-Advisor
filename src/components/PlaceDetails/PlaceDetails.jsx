@@ -9,8 +9,11 @@ import { Phone } from '@mui/icons-material'
 
 import useStyles from './styles'
 
-const PlaceDetails = ({place}) => {
+const PlaceDetails = ({place, selected, refProp }) => {
   const classes=useStyles()
+
+  // To make the list scroll automatically
+  if(selected) refProp?.current?.scrollIntoView({behavior:'smooth',block:'start'})
  
   return (
     <Card elevation={6}>
@@ -104,7 +107,6 @@ const PlaceDetails = ({place}) => {
             color="primary"
             onClick={() => window.open(place.web_url, "_blank")}
           >
-            {" "}
             Trip Advisor
           </Button>
 
@@ -113,7 +115,6 @@ const PlaceDetails = ({place}) => {
             color="primary"
             onClick={() => window.open(place.website, "_blank")}
           >
-            {" "}
             Website
           </Button>
         </CardActions>
