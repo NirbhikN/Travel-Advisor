@@ -33,23 +33,22 @@ const App = () => {
     })
   }, [])
   
-
-
-
   // Location of edges when map is zoomed or moved || When map is loading
   useEffect(() => {
-    setIsLoading(true)
+    if(bounds.sw && bounds.ne){
 
-    getPlacesData(type, bounds.sw,bounds.ne)
-    // getPlacesData()
-      .then((data) => {
-        setPlaces(data)
-        setFilteredPlaces([]) //When we reset the filtered places
-        setIsLoading(false) // Loading stops when data is fetched
+      setIsLoading(true)
 
-      })
-    
-  }, [type, coordinates,bounds])
+      getPlacesData(type, bounds.sw,bounds.ne)
+      // getPlacesData()
+        .then((data)=>{
+          setPlaces(data?.filter((place) => place.name && place.num_reviews > 0))  // filters empty restaurants
+          setFilteredPlaces([]) //When we reset the filtered places
+          setIsLoading(false) // Loading stops when data is fetched
+
+        })
+    }
+  }, [type,bounds])
   
 
   // Only works when ratings changes
@@ -64,7 +63,7 @@ const App = () => {
   return (
     <>
     <CssBaseline/>
-    <Header/>
+    <Header setCoordinates={setCoordinates} />
     <Grid container spacing={2} style={{width:'100%'}}>
       <Grid item xs={12} md={4}>
           <List 
